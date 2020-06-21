@@ -9,7 +9,7 @@ let
 
   reflexUtilsSrc = fetchGit {
     url = https://github.com/atidot/reflex-utils;
-    rev = "26b8a099159ba798b5696e73ba0d0f022a027bb9";
+    rev = "9ffda7ef04c3d538fdf2ae8d6f3eddcd456de8ab";
   };
 
   reflex-platform = import reflexPlatformSrc {};
