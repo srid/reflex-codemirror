@@ -56,7 +56,7 @@ codemirror configuration textE scrollToE = do
                -- ^ Element
                -> IORef (Maybe CodeMirrorRef)
                -- ^ Local state
-               -> (Text -> JSM ())
+               -> (Text -> IO ())
                -- ^ Trigger for output event
                -> Configuration
                -- ^ Chart data
@@ -77,7 +77,7 @@ codemirror configuration textE scrollToE = do
                     -- ^ Element
                     -> IORef (Maybe CodeMirrorRef)
                     -- ^ Local state
-                    -> (Text -> JSM ())
+                    -> (Text -> IO ())
                     -- ^ Trigger for output event
                     -> Configuration
                     -- ^ Chart data
@@ -119,7 +119,7 @@ codemirror configuration textE scrollToE = do
                 Just scrollTo_ -> scrollIntoView ref_ scrollTo_ 200
 
 
-        onChangeCallback :: (Text -> JSM ())
+        onChangeCallback :: (Text -> IO ())
                          -> Text
                          -> JSM ()
         onChangeCallback trigger t = do
