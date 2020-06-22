@@ -16,12 +16,13 @@ let
 in
 reflex-platform.project({ pkgs, ... }: {
   packages = {
-    reflex-codemirror = ../reflex-codemirror;
+    reflex-codemirror = ../.;
+    example = ./.;
     reflex-utils      = reflexUtilsSrc;
   };
 
   shells = {
-    ghcjs = [ "reflex-codemirror"
+    ghcjs = [ "example"
               "reflex-utils"
             ];
   };
