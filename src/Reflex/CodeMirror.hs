@@ -8,7 +8,7 @@ module Reflex.CodeMirror ( module Reflex.CodeMirror.Types
                          , module Reflex.CodeMirror.FFI
                          , codemirror
                          ) where
-import "base"             Control.Monad.IO.Class (liftIO)
+import "base"             Control.Monad.IO.Class (MonadIO, liftIO)
 import "base"             Data.IORef (IORef, newIORef, writeIORef, readIORef)
 import "text"             Data.Text (Text)
 import "jsaddle"          Language.Javascript.JSaddle -- (JSVal) --  GHCJS.Types (JSVal)
@@ -17,7 +17,16 @@ import                    GHCJS.DOM.Element hiding (scrollIntoView) -- (IsElemen
 import                    Reflex.CodeMirror.FFI
 import                    Reflex.CodeMirror.Types hiding (configuration)
 
-codemirror :: forall t m. (MonadWidget t m)
+codemirror :: forall t m.
+           (DomBuilder t m,
+            MonadIO m,
+            PostBuild t m,
+            TriggerEvent t m,
+            MonadJSM m,
+            PerformEvent t m,
+            MonadIO (Performable m),
+            IsElement (RawElement (DomBuilderSpace m))
+           )
            => Configuration
            -> Event t Text
            -> Event t (Maybe LineChar)
