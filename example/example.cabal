@@ -1,0 +1,36 @@
+name:                example
+version:             0.1.0.0
+synopsis:            Reflex CodeMirror Example
+description:         Please see README.md
+homepage:            http://github.com/atidot/ux/reflex/reflex-codemirror
+license:             MIT
+tested-with:         GHCJS == 8.2.2
+author:              Atidot Ltd
+maintainer:          devops@atidot.com
+copyright:           Copyright Atidot Ltd 2016
+category:            Other
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable reflex-codemirror-exe
+  main-is: Example.hs
+  hs-source-dirs:
+      .
+  ghc-options: -threaded
+  build-depends:
+      base >=4.7 && <5
+    , lens
+    , time
+    , text
+    , data-default
+    , aeson
+    , bytestring
+    , reflex-dom
+    , reflex-utils
+    , reflex-codemirror
+  default-language: Haskell2010
+
+
+source-repository head
+  type:     git
+  location: https://github.com/atidot/reflex-widgets
