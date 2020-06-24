@@ -38,8 +38,6 @@ registerOnChange codeMirrorRef callback = do
     codemirror <- valToObject . unCodeMirrorRef $ codeMirrorRef
     _ <- codemirror ^. js2 "on" "change" (fun $ \_ _ _ -> do
         x <- codemirror ^. js0 "getValue"
-        w <- jsg "console"
-        _ <- w ^. js1 "log" x
         t <- valToText x
         -- _ <- valToText =<< codemirror ^. js0 "getValue"
         callback t
