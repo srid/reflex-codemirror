@@ -8,6 +8,7 @@ import "base"  Data.Data (Data)
 import "base"  Data.Typeable (Typeable)
 import "aeson" Data.Aeson (Value)
 import "text"  Data.Text (Text)
+import         Data.Map (Map)
 
 
 data Configuration
@@ -39,6 +40,7 @@ data Configuration
     , _configuration_tabIndex                :: !(Maybe Int)
     , _configuration_autoFocus               :: !(Maybe Bool)
     , _configuration_autoRefresh             :: !(Maybe Bool)
+    , _configuration_extraKeys               :: !(Maybe (Map Text Text))
     --
     , _configuration_pollInterval :: !(Maybe Int) -- Ms
     --

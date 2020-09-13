@@ -32,6 +32,7 @@ instance Default Configuration where
                         Nothing
                         Nothing
                         Nothing
+                        Nothing
 
 instance Default LineChar where
     def = LineChar 0 0
