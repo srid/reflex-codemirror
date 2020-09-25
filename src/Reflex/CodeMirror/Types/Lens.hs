@@ -1,7 +1,8 @@
-{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
+
 module Reflex.CodeMirror.Types.Lens where
 
 import Control.Lens
