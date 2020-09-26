@@ -37,8 +37,9 @@ codemirror ::
   Configuration ->
   Event t Text ->
   Event t (Maybe LineChar) ->
+  (CodeMirrorRef -> JSM ()) ->
   m (Event t Text)
-codemirror configuration textE scrollToE = do
+codemirror configuration textE scrollToE initFunc = do
   -- HTML element
   (element_, _) <- el' "textarea" $ text $ maybe "" id (_configuration_value configuration)
 
@@ -113,6 +114,7 @@ codemirror configuration textE scrollToE = do
       registerOnChange
         ref_
         (onChangeCallback trigger)
+      initFunc ref_
       case mText of
         Nothing -> return ()
         Just text_ -> setValue ref_ text_
