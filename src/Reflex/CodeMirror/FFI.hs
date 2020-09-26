@@ -5,6 +5,7 @@
 module Reflex.CodeMirror.FFI where
 
 import "lens" Control.Lens hiding (element, (#))
+import Control.Monad (void, when)
 import "aeson" Data.Aeson (toJSON)
 import "text" Data.Text (Text)
 import GHCJS.DOM.Element (IsElement, toElement, unElement)
@@ -52,6 +53,24 @@ registerOnChange codeMirrorRef callback = do
             return ()
         )
   return ()
+
+-- | Run the autocomplete command when the given key is pressed.
+autocompleteOn :: CodeMirrorRef -> Double -> JSM ()
+autocompleteOn cmRef completionKey = do
+  codemirror <- valToObject . unCodeMirrorRef $ cmRef
+  void $
+    codemirror
+      ^. js2
+        "on"
+        "keyup"
+        ( fun $ \_ _ [_, evt] -> do
+            st <- val codemirror ! "state"
+            complActive <- valToBool =<< val st ! "completionActive"
+            keyCode <- valToNumber =<< val evt ! "keyCode"
+            void $ jsg "console" ^. js1 "log" (show keyCode)
+            when (not complActive && keyCode == completionKey) $ do
+              void $ jsg "CodeMirror" ! "commands" ^. js1 "autocomplete" codemirror
+        )
 
 setValue ::
   -- | ref
